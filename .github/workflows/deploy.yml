@@ -6,7 +6,7 @@ on:
 jobs:
     test_spring_boot:
         env:
-            ENV_VARIABLE1: env_value
+            ENV_VARIABLE1: ${{ secrets.MY_SECRET }}
         runs-on: ubuntu-latest
         container:
             image: eclipse-temurin:25
