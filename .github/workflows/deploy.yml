@@ -38,6 +38,13 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version: 22
+            - name: Cache NPM dependencies
+              uses: actions/cache@v1
+              with:
+                path: ~/.npm
+                key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                    ${{ runner.OS }}-npm-cache-
             - name: npm dependencies
               run: npm ci
               working-directory: frontend
