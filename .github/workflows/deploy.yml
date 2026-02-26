@@ -1,0 +1,30 @@
+name: Deploy spring boot - react app
+on: 
+    push:
+        branches:
+            - main
+jobs:
+    test_spring_boot:
+        runs-on: ubuntu-latest
+        steps:
+            - name: download spring boot code
+              uses: actions/checkout@v6
+            - name: setup java
+              uses: actions/setup-java@v5
+              with:
+                distribution: 'temurin'
+                java-version: '25'
+                cache: maven
+            - name: Compile code
+              run: mvn -B clean compile
+              working-directory: backend
+
+            - name: test code
+              run: mvn -B clean verify
+              working-directory: backend
+
+            - name: Upload compiled classes
+              uses: actions/upload-artifact@v4
+              with:
+                  name: compiled-classes
+                  path: backend/target/classes
