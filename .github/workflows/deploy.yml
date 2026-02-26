@@ -28,3 +28,23 @@ jobs:
               with:
                   name: compiled-classes
                   path: backend/target/classes
+    test_react:
+        needs: test_spring_boot
+        runs-on: ubuntu-latest
+        steps:
+            - name: download spring boot code
+              uses: actions/checkout@v6
+            - name: setup node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 22
+            - name: test react
+              run: npm run lint
+              working-directory: frontend
+            - name: build react
+              run: npm run build
+            - name: upload dist folder
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist-files
+                  path: frontend/dist
