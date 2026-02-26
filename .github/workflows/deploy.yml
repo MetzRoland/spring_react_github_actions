@@ -6,6 +6,8 @@ on:
 jobs:
     test_spring_boot:
         runs-on: ubuntu-latest
+        container:
+            image: eclipse-temurin:25
         steps:
             - name: download spring boot code
               uses: actions/checkout@v6
@@ -31,6 +33,8 @@ jobs:
     test_react:
         needs: test_spring_boot
         runs-on: ubuntu-latest
+        container:
+            image: node:22
         steps:
             - name: download spring boot code
               uses: actions/checkout@v6
