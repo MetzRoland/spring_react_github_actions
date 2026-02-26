@@ -5,6 +5,8 @@ on:
             - main
 jobs:
     test_spring_boot:
+        env:
+            ENV_VARIABLE1: env_value
         runs-on: ubuntu-latest
         container:
             image: eclipse-temurin:25
@@ -28,6 +30,8 @@ jobs:
               with:
                   name: compiled-classes
                   path: backend/target/classes
+            - name: log env variables
+              run: echo "my env variable = $ENV_VARIABLE1"
     test_react:
         needs: test_spring_boot
         runs-on: ubuntu-latest
