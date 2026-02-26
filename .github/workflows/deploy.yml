@@ -18,11 +18,15 @@ jobs:
             #     java-version: '25'
             #     cache: maven
             - name: Compile code
-              run: ./mvnw -B clean compile
+              run: |
+                 chmod +x mvnw
+                 ./mvnw -B clean compile
               working-directory: backend
 
             - name: test code
-              run: ./mvnw -B clean verify
+              run: |
+                 chmod +x mvnw
+                 ./mvnw -B clean verify
               working-directory: backend
 
             - name: Upload compiled classes
